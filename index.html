@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>ToDo List Knockout</title>
+</head>
+
+<body>
+    <div class="flex flex-col items-center gap-5" id="todoList">
+        <header>
+            <h1 class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400 text-4xl">ToDo
+                Application</h1>
+        </header>
+
+        <div class="flex gap-5 flex-row justify-center items-center">
+            <div class="self-center"><input type="text" placeholder="What to do?" autofocus
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    data-bind="textInput: newTaskTitle">
+            </div>
+            <div class="self-center"><button
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    data-bind="click: addTask">Add
+                    task</button>
+            </div>
+
+        </div>
+
+        <div class="flex flex-row gap-10">
+            <div>
+                <h3 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Tasks</h3>
+
+                <div data-bind="visible: tasks().length">
+                    <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400"
+                        data-bind="foreach: tasks">
+                        <li>
+                            <label data-bind="click: $parent.checkTask">
+                                <input type="checkbox" />
+                                <span data-bind="text: title"></span>
+                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                    data-bind="click: $parent.removeTask">(remove)</a>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <div data-bind="visible: !tasks().length">No tasks.</div>
+            </div>
+
+            <div>
+                <h3 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Completed tasks</h3>
+
+                <div data-bind="visible: completedTasks().length">
+                    <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400"
+                        data-bind="foreach: completedTasks">
+                        <li>
+                            <span data-bind="text: title"></span>
+                            <a href=" #" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                data-bind="click: $parent.undoTask">
+                                (undo)</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div data-bind="visible: !completedTasks().length">
+                    No tasks.
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="./js/knockout.js"></script>
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
